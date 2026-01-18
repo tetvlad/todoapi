@@ -1,13 +1,14 @@
 package ru.netology.todoapi.controller;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import ru.netology.todoapi.model.Task;
 import ru.netology.todoapi.service.TaskService;
-import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
+
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
@@ -24,13 +25,19 @@ public class TaskController {
     }
 
     @PostMapping
-    public Task create(@Valid @RequestBody Task task) {
+    public Task create(@RequestBody Task task) {
+        if (task.getTitle() == null || task.getTitle().isBlank()) {
+            throw new ResponseStatusException(BAD_REQUEST);
+        }
         return service.create(task);
     }
 
     @PutMapping("/{id}")
     public Task update(@PathVariable long id,
-                       @Valid @RequestBody Task task) {
+                       @RequestBody Task task) {
+        if (task.getTitle() == null || task.getTitle().isBlank()) {
+            throw new ResponseStatusException(BAD_REQUEST);
+        }
         return service.update(id, task);
     }
 
@@ -39,4 +46,3 @@ public class TaskController {
         service.delete(id);
     }
 }
-

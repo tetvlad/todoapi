@@ -21,7 +21,7 @@ Content-Type: application/json
 }
 
 ### Удалить задачу
-DELETE http://localhost:8090/tasks/5
+DELETE http://localhost:8090/tasks/1
 
 ### Попытка создать задачу без названия
 POST http://localhost:8090/tasks
