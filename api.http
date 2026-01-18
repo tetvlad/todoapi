@@ -1,0 +1,35 @@
+### Получить все задачи
+GET http://localhost:8090/tasks
+
+
+### Создать задачу
+POST http://localhost:8090/tasks
+Content-Type: application/json
+
+{
+  "title": "Купить молоко",
+  "completed": false
+}
+
+### Обновить задачу
+PUT http://localhost:8090/tasks/1
+Content-Type: application/json
+
+{
+  "title": "Обновлённая задача",
+  "completed": true
+}
+
+### Удалить задачу
+DELETE http://localhost:8090/tasks/5
+
+### Попытка создать задачу без названия
+POST http://localhost:8090/tasks
+Content-Type: application/json
+
+{
+  "title": "",
+  "completed": false
+}
+
+
